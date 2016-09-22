@@ -7,15 +7,10 @@ $(document).ready(function(){
 		$(".startButton").hide();
 	})
 
-	// var userAnswer = {
-	// 	option0 : false,
-	// 	option1 : false,
-	// 	option2 : false,
-	// 	option3 : false,
-	// }
 
 	$(".userAnswer").click(function(event){
 		window.selectedAnswer = $(this).attr("id")
+		window.selectedAnswerValue = $(this).attr("value")
 		// userAnswer[selectedAnswer] = true
 		console.log("mmm",window.selectedAnswer)
 	})
@@ -30,10 +25,11 @@ $(document).ready(function(){
 	}
 
 	Question.prototype.isRightAnswer = function (option) {
-		if (this.answer=== option){
-			return true
-		}
+		console.log("OPTION ENTERED FOR ANSWER IS ", option, " WHILE THIS.ANSWER IS ", this.answer)
+		return this.answer === option
 	}
+
+
 
 	var questionsArray = []
 	var question1 = new Question ("What is a sandbag?", ["An easy climb", "A horrendously hard climb", "A climb which receives a much lower grade than deserved", "A climb which receives a much higher grade than deserved"], "option2")
@@ -57,7 +53,7 @@ $(document).ready(function(){
 	var question10 = new Question("What is a whipper?", ["When the rope slashes a part of your body",  "Falling to the ground while leading", "Getting rope burnt", "Any fall beyond the last placed or clipped piece of protection"], "option3")
 
 	questionsArray.push(question1, question2, question3, question4, question5, question6, question7, question8, question9, question10)
-	console.log(questionsArray)
+	// console.log(questionsArray)
 	var counter = 0
 	var currentAnswerPoints = 0
 	var totalPoints = 0
@@ -68,7 +64,7 @@ $(document).ready(function(){
 		nextQuestion()
 	}
 
-	var quiz = nextQuestion()
+	// var quiz = nextQuestion()
 
 	//<--* function to repeat the quiz after clicking the button newQuiz *-->
 
@@ -78,101 +74,81 @@ $(document).ready(function(){
 		counter = 0
 		currentAnswerPoints = 0
 		totalPoints = 0
-		quiz = nextQuestion()
+		document.getElementById("count").innerHTML = counter + 1
+		document.getElementById("question").innerHTML = questionsArray[0].question
+		document.getElementById("option0text").innerHTML = questionsArray[0].options[0];
+		document.getElementById("option1text").innerHTML = questionsArray[0].options[1];
+		document.getElementById("option2text").innerHTML = questionsArray[0].options[2];
+		document.getElementById("option3text").innerHTML = questionsArray[0].options[3];
 	})
+
+	document.getElementById("question").innerHTML = questionsArray[0].question
+	document.getElementById("option0text").innerHTML = questionsArray[0].options[0];
+	document.getElementById("option1text").innerHTML = questionsArray[0].options[1];
+	document.getElementById("option2text").innerHTML = questionsArray[0].options[2];
+	document.getElementById("option3text").innerHTML = questionsArray[0].options[3];
 
 
 	
 	function nextQuestion () {
-
-		// userAnswer.option0=false
-		// userAnswer.option1=false
-		// userAnswer.option2=false
-		// userAnswer.option3=false
-		$('input[name=option]').attr('checked',false);
-		document.getElementById("count").innerHTML = counter + 1
-		totalPoints = totalPoints + currentAnswerPoints
-		currentAnswerPoints = 0
-		document.getElementById("score").innerHTML = totalPoints
-		var presentQuestion = questionsArray[counter].question
-		var presentOptions = questionsArray[counter].options
-		// var presentAnswer = .answer
-		// var rightAnswer = questionsArray[counter].isRightAnswer(questionsArray[counter].answer)
-		// console.log("jjj",rightAnswer)
-		// console.log("question number", presentQuestion)
-		
-		//<---** if statement makes code run until it reaches the 10th question, when it reaches 10, it shows results button **--->
-			if(counter<10){
-				document.getElementById("question").innerHTML = presentQuestion
-				console.log(presentQuestion)
-				document.getElementById("option0text").innerHTML = presentOptions[0];
-				document.getElementById("option1text").innerHTML = presentOptions[1];
-				document.getElementById("option2text").innerHTML = presentOptions[2];
-				document.getElementById("option3text").innerHTML = presentOptions[3];
-
-				// for(var key in userAnswer){
-				// 	console.log(userAnswer[key])
-				console.log("log",questionsArray[counter].isRightAnswer(window.selectedAnswer))
-					// if(questionsArray[counter].isRightAnswer(window.selectedAnswer)){
-					// 	currentAnswerPoints = 1
-					// 	console.log("kkk",currentAnswerPoints)
-					// }
-
-					// else if(questionsArray[counter].isRightAnswer(window.selectedAnswer) === false){
-					// 	currentAnswerPoints=0
-					// }
-				// }
-
-				// if (questionsArray[counter].isRightAnswer(userAnswer) === false){
-				// 	currentAnswerPoints = 0
-				// }
-
-
-				// document.getElementById("option" + presentQuestion.isRightAnswer(presentAnswer).onclick = function () {
-				// 	currentAnswerPoints = 1
-				// }
-
-				// if(questionsArray[i].isRightAnswer(questionsArray[i].answer)){
-				// 	currentAnswerPoints = 1
-				// }
-				// else if(questionsArray[i].isRightAnswer(questionsArray[i].answer) === false){
-				// 	currentAnswerPoints = 0
-				// }
-			
-				// document.getElementById("option0").onclick = function () {
-				// 	currentAnswerPoints = 0
-				// 	// console.log("NOOOOOO", currentAnswerPoints)
-				// }
-				// document.getElementById("option1").onclick = function () {
-				// 	currentAnswerPoints = 0
-				// 	// console.log("NOOOOOO", currentAnswerPoints)
-				// }
-				// document.getElementById("option2").onclick = function () {
-				// 	currentAnswerPoints = 0
-				// 	// console.log("NOOOOOO", currentAnswerPoints)
-				// }
-				// document.getElementById("option3").onclick = function () {
-				// 	currentAnswerPoints = 0
-				// 	// console.log("NOOOOOO", currentAnswerPoints)
-				// }
-				
-				// // this part of the function evaluates if user gets question correct. It concatenates the word option with the answer to the current question (which is the array index position)
-				
-				// document.getElementById("option" + presentQuestion.answer).onclick = function () {
-				// 	currentAnswerPoints = 1
-				// 	// console.log("YIEH BOIII", currentAnswerPoints)
+		if (counter === 9){
+			console.log("EXTRA QUESTION ACTIVATED!!!")
+			var userAnswer = window.selectedAnswer
+			var userAnswerCorrect = questionsArray[counter].isRightAnswer(userAnswer)
+			if (questionsArray[counter].isRightAnswer(userAnswer)){
+				currentAnswerPoints=1
 			}
-			
-			
-
-			else if (counter === 11){
-				$("#results").hide()
-				$("#resultButton").toggle();
-				$("#questionContainer").hide();
-				$(".tally").hide();
+			else if(!userAnswer || questionInArray.isRightAnswer(userAnswer)===false){
+				currentAnswerPoints = 0
 			}
-
+			$("#results").hide()
+			$("#resultButton").toggle();
+			$("#questionContainer").hide();
+			$(".tally").hide();
+		} else {
+			// var questionInArray = questionsArray[counter]
+			// var presentQuestion = questionsArray[counter].question
+			// var presentOptions = questionsArray[counter].options
+			var userAnswer = window.selectedAnswer
+			var userAnswerCorrect = questionsArray[counter].isRightAnswer(userAnswer)
+			if (questionsArray[counter].isRightAnswer(userAnswer)){
+				currentAnswerPoints=1
+			}
+			else if(!userAnswer || questionInArray.isRightAnswer(userAnswer)===false){
+				currentAnswerPoints = 0
+			}
 			counter++
+
+			// var questionInArray = questionsArray[counter]
+			// var presentQuestion = questionsArray[counter].question
+			// var presentOptions = questionsArray[counter].options
+			// var userAnswer = window.selectedAnswer
+			// var userAnswerCorrect = questionsArray[counter].isRightAnswer(userAnswer)
+			if(counter<10){
+				document.getElementById("question").innerHTML = questionsArray[counter].question
+				document.getElementById("option0text").innerHTML = questionsArray[counter].options[0];
+				document.getElementById("option1text").innerHTML = questionsArray[counter].options[1];
+				document.getElementById("option2text").innerHTML = questionsArray[counter].options[2];
+				document.getElementById("option3text").innerHTML = questionsArray[counter].options[3];
+			}
+			// else if (counter === 11){
+			// 	$("#results").hide()
+			// 	$("#resultButton").toggle();
+			// 	$("#questionContainer").hide();
+			// 	$(".tally").hide();
+			// }
+
+
+
+			console.log("COUNTER IS CURRENTLY ", counter)
+			$('input[name=option]').attr('checked',false);
+			document.getElementById("count").innerHTML = counter + 1
+			totalPoints = totalPoints + currentAnswerPoints
+			currentAnswerPoints = 0
+			document.getElementById("score").innerHTML = totalPoints
+			console.log("TOTAL POINTS SO FAR: ", totalPoints)
+
+		}
 	
 	}
 
