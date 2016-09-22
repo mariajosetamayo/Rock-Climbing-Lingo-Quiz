@@ -98,7 +98,7 @@ $(document).ready(function(){
 			if (questionsArray[counter].isRightAnswer(userAnswer)){
 				currentAnswerPoints=1
 			}
-			else if(!userAnswer || questionInArray.isRightAnswer(userAnswer)===false){
+			else if(!userAnswer || questionsArray[counter].isRightAnswer(userAnswer)===false){
 				currentAnswerPoints = 0
 			}
 			$("#results").hide()
@@ -106,24 +106,16 @@ $(document).ready(function(){
 			$("#questionContainer").hide();
 			$(".tally").hide();
 		} else {
-			// var questionInArray = questionsArray[counter]
-			// var presentQuestion = questionsArray[counter].question
-			// var presentOptions = questionsArray[counter].options
 			var userAnswer = window.selectedAnswer
 			var userAnswerCorrect = questionsArray[counter].isRightAnswer(userAnswer)
 			if (questionsArray[counter].isRightAnswer(userAnswer)){
 				currentAnswerPoints=1
 			}
-			else if(!userAnswer || questionInArray.isRightAnswer(userAnswer)===false){
+			else if(!userAnswer || questionsArray[counter].isRightAnswer(userAnswer)===false){
 				currentAnswerPoints = 0
 			}
 			counter++
 
-			// var questionInArray = questionsArray[counter]
-			// var presentQuestion = questionsArray[counter].question
-			// var presentOptions = questionsArray[counter].options
-			// var userAnswer = window.selectedAnswer
-			// var userAnswerCorrect = questionsArray[counter].isRightAnswer(userAnswer)
 			if(counter<10){
 				document.getElementById("question").innerHTML = questionsArray[counter].question
 				document.getElementById("option0text").innerHTML = questionsArray[counter].options[0];
@@ -131,13 +123,7 @@ $(document).ready(function(){
 				document.getElementById("option2text").innerHTML = questionsArray[counter].options[2];
 				document.getElementById("option3text").innerHTML = questionsArray[counter].options[3];
 			}
-			// else if (counter === 11){
-			// 	$("#results").hide()
-			// 	$("#resultButton").toggle();
-			// 	$("#questionContainer").hide();
-			// 	$(".tally").hide();
-			// }
-
+			
 
 
 			console.log("COUNTER IS CURRENTLY ", counter)
@@ -148,6 +134,54 @@ $(document).ready(function(){
 			document.getElementById("score").innerHTML = totalPoints
 			console.log("TOTAL POINTS SO FAR: ", totalPoints)
 
+
+
+
+			// var questionInArray = questionsArray[counter]
+			// console.log("hdfhsd", questionInArray)
+			// var presentQuestion = questionsArray[counter].question
+			// console.log(questionsArray[counter])
+			// var presentOptions = questionsArray[counter].options
+			// var userAnswer = window.selectedAnswer
+			// console.log("ppp",userAnswer)
+			// var userAnswerCorrect = questionsArray[counter].isRightAnswer(userAnswer)
+			// console.log("ooo", userAnswerCorrect)
+
+			
+			//<---** if statement makes code run until it reaches the 10th question, when it reaches 10, it shows results button **--->
+				// if(counter<10){
+				// 	document.getElementById("question").innerHTML = presentQuestion
+				// 	console.log(presentQuestion)
+				// 	document.getElementById("option0text").innerHTML = presentOptions[0];
+				// 	document.getElementById("option1text").innerHTML = presentOptions[1];
+				// 	document.getElementById("option2text").innerHTML = presentOptions[2];
+				// 	document.getElementById("option3text").innerHTML = presentOptions[3];
+
+				// 	// console.log("esta es la respuesta", questionsArray[counter].answer)
+				// 	// console.log("log", questionsArray[counter].isRightAnswer(window.selectedAnswerValue))
+
+
+				// 	if (questionsArray[counter].isRightAnswer(userAnswer)){
+				// 		currentAnswerPoints=1
+				// 	}
+
+				// 	else if(questionInArray.isRightAnswer(userAnswer)===false){
+				// 		currentAnswerPoints = 0
+				// 	}
+
+				// 	// console.log("kkk", currentAnswerPoints)
+				// }
+				
+				
+
+				// else if (counter === 11){
+				// 	$("#results").hide()
+				// 	$("#resultButton").toggle();
+				// 	$("#questionContainer").hide();
+				// 	$(".tally").hide();
+				// }
+
+				// counter++
 		}
 	
 	}
