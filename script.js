@@ -2,17 +2,15 @@
 $(document).ready(function(){
 
 	$(".startButton").click(function(){
-		$("#questionContainer").toggle();
-		$(".tally").toggle();
-		$(".startButton").hide();
+		$("#questionContainer").toggle()
+		$(".tally").toggle()
+		$(".startButton").hide()
 	})
 
 
 	$(".userAnswer").click(function(event){
 		window.selectedAnswer = $(this).attr("id")
 		window.selectedAnswerValue = $(this).attr("value")
-		// userAnswer[selectedAnswer] = true
-		console.log("mmm",window.selectedAnswer)
 	})
 
 
@@ -25,7 +23,6 @@ $(document).ready(function(){
 	}
 
 	Question.prototype.isRightAnswer = function (option) {
-		console.log("OPTION ENTERED FOR ANSWER IS ", option, " WHILE THIS.ANSWER IS ", this.answer)
 		return this.answer === option
 	}
 
@@ -38,7 +35,7 @@ $(document).ready(function(){
 
 	var question3 = new Question("What is free climbing?",["To climb without a rope","Climbing without unnatural aids other than used for protection","Climbing a route alone with an auto-belay","Climbing without natural aids used for protection"], "option1")
 
-	var question4 = new Question("Which is the best description for a crimp?", ["To successfully complete a climbing route without falling on the first attempt after receiving beta of some form", "To fall off a climbing route too quickly", "To successfully complete a route without falling", "To complete a climbing route very quickly"], "option2")
+	var question4 = new Question("Which is the best description for a crimp?", ["A horrendously small and slippery hold" ,"A very large hold that you can grab easily", "A hold which is only just big enough to be grasped with the tips of the fingers", "A rounded and slippery hold"], "option2")
 
 	var question5 = new Question("What is a flash?", ["To successfully complete a climbing route without falling on the first attempt after receiving beta of some form", "To fall off a climbing route too quickly", "To successfully complete a route without falling", "To complete a climbing route very quickly"], "option0")
 
@@ -53,7 +50,7 @@ $(document).ready(function(){
 	var question10 = new Question("What is a whipper?", ["When the rope slashes a part of your body",  "Falling to the ground while leading", "Getting rope burnt", "Any fall beyond the last placed or clipped piece of protection"], "option3")
 
 	questionsArray.push(question1, question2, question3, question4, question5, question6, question7, question8, question9, question10)
-	// console.log(questionsArray)
+
 	var counter = 0
 	var currentAnswerPoints = 0
 	var totalPoints = 0
@@ -64,7 +61,6 @@ $(document).ready(function(){
 		nextQuestion()
 	}
 
-	// var quiz = nextQuestion()
 
 	//<--* function to repeat the quiz after clicking the button newQuiz *-->
 
@@ -118,13 +114,11 @@ $(document).ready(function(){
 				setQuestion(counter)
 			}
 
-			console.log("COUNTER IS CURRENTLY ", counter)
 			$('input[name=option]').attr('checked',false);
 			document.getElementById("count").innerHTML = counter + 1
 			totalPoints = totalPoints + currentAnswerPoints
 			currentAnswerPoints = 0
 			document.getElementById("score").innerHTML = totalPoints
-			console.log("TOTAL POINTS SO FAR: ", totalPoints)
 		}
 	
 	}
