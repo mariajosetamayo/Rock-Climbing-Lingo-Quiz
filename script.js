@@ -68,6 +68,14 @@ $(document).ready(function(){
 
 	//<--* function to repeat the quiz after clicking the button newQuiz *-->
 
+	function setQuestion(index){
+		document.getElementById("question").innerHTML = questionsArray[index].question
+		document.getElementById("option0text").innerHTML = questionsArray[index].options[0];
+		document.getElementById("option1text").innerHTML = questionsArray[index].options[1];
+		document.getElementById("option2text").innerHTML = questionsArray[index].options[2];
+		document.getElementById("option3text").innerHTML = questionsArray[index].options[3];
+	}	
+
 	$("#newQuiz").click(function(){
 		$("#results").hide()
 		$(".startButton").show()
@@ -75,21 +83,11 @@ $(document).ready(function(){
 		currentAnswerPoints = 0
 		totalPoints = 0
 		document.getElementById("count").innerHTML = counter + 1
-		document.getElementById("question").innerHTML = questionsArray[0].question
-		document.getElementById("option0text").innerHTML = questionsArray[0].options[0];
-		document.getElementById("option1text").innerHTML = questionsArray[0].options[1];
-		document.getElementById("option2text").innerHTML = questionsArray[0].options[2];
-		document.getElementById("option3text").innerHTML = questionsArray[0].options[3];
+		setQuestion(0)
 	})
 
-	document.getElementById("question").innerHTML = questionsArray[0].question
-	document.getElementById("option0text").innerHTML = questionsArray[0].options[0];
-	document.getElementById("option1text").innerHTML = questionsArray[0].options[1];
-	document.getElementById("option2text").innerHTML = questionsArray[0].options[2];
-	document.getElementById("option3text").innerHTML = questionsArray[0].options[3];
+	setQuestion(0)
 
-
-	
 	function nextQuestion () {
 		if (counter === 9){
 			console.log("EXTRA QUESTION ACTIVATED!!!")
@@ -117,14 +115,8 @@ $(document).ready(function(){
 			counter++
 
 			if(counter<10){
-				document.getElementById("question").innerHTML = questionsArray[counter].question
-				document.getElementById("option0text").innerHTML = questionsArray[counter].options[0];
-				document.getElementById("option1text").innerHTML = questionsArray[counter].options[1];
-				document.getElementById("option2text").innerHTML = questionsArray[counter].options[2];
-				document.getElementById("option3text").innerHTML = questionsArray[counter].options[3];
+				setQuestion(counter)
 			}
-			
-
 
 			console.log("COUNTER IS CURRENTLY ", counter)
 			$('input[name=option]').attr('checked',false);
@@ -133,55 +125,6 @@ $(document).ready(function(){
 			currentAnswerPoints = 0
 			document.getElementById("score").innerHTML = totalPoints
 			console.log("TOTAL POINTS SO FAR: ", totalPoints)
-
-
-
-
-			// var questionInArray = questionsArray[counter]
-			// console.log("hdfhsd", questionInArray)
-			// var presentQuestion = questionsArray[counter].question
-			// console.log(questionsArray[counter])
-			// var presentOptions = questionsArray[counter].options
-			// var userAnswer = window.selectedAnswer
-			// console.log("ppp",userAnswer)
-			// var userAnswerCorrect = questionsArray[counter].isRightAnswer(userAnswer)
-			// console.log("ooo", userAnswerCorrect)
-
-			
-			//<---** if statement makes code run until it reaches the 10th question, when it reaches 10, it shows results button **--->
-				// if(counter<10){
-				// 	document.getElementById("question").innerHTML = presentQuestion
-				// 	console.log(presentQuestion)
-				// 	document.getElementById("option0text").innerHTML = presentOptions[0];
-				// 	document.getElementById("option1text").innerHTML = presentOptions[1];
-				// 	document.getElementById("option2text").innerHTML = presentOptions[2];
-				// 	document.getElementById("option3text").innerHTML = presentOptions[3];
-
-				// 	// console.log("esta es la respuesta", questionsArray[counter].answer)
-				// 	// console.log("log", questionsArray[counter].isRightAnswer(window.selectedAnswerValue))
-
-
-				// 	if (questionsArray[counter].isRightAnswer(userAnswer)){
-				// 		currentAnswerPoints=1
-				// 	}
-
-				// 	else if(questionInArray.isRightAnswer(userAnswer)===false){
-				// 		currentAnswerPoints = 0
-				// 	}
-
-				// 	// console.log("kkk", currentAnswerPoints)
-				// }
-				
-				
-
-				// else if (counter === 11){
-				// 	$("#results").hide()
-				// 	$("#resultButton").toggle();
-				// 	$("#questionContainer").hide();
-				// 	$(".tally").hide();
-				// }
-
-				// counter++
 		}
 	
 	}
